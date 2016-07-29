@@ -1,12 +1,18 @@
 //- html(manifest="/appcache.manifest")
 html
 	head
+
+		title Pokedex-Go
+
+		meta(name="viewport" content="initial-scale=1 maximum-scale=1 user-scalable=0 minimal-ui")
+		meta(name="apple-mobile-web-app-capable",content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="black")
+
 		link(rel="apple-touch-icon" href="/images/ios/AppIcon.appiconset/Icon-App-60x60@2x.png")
-		link(rel="apple-touch-icon" sizes="180x180" href="/images/ios/AppIcon.appiconset/Icon-App-60x60@3x.png")
 		link(rel="apple-touch-icon" sizes="76x76" href="/images/ios/AppIcon.appiconset/Icon-App-76x76@1x.png")
+		link(rel="apple-touch-icon" sizes="120x120" href="/images/ios/AppIcon.appiconset/Icon-App-60x60@3x.png")
 		link(rel="apple-touch-icon" sizes="152x152" href="/images/ios/AppIcon.appiconset/Icon-App-76x76@2x.png")
 
-		meta(name="viewport" content="initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1,width=device-width")
 		link(href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet',type='text/css')
 		link(rel="stylesheet",type="text/css",href="styles/main.css")
 		script(src="/scripts/jquery.js")
