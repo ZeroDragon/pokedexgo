@@ -1,5 +1,5 @@
 {
-	"port" : 8080,
+	"port" : 1337,
 	"session_secret" : "my secret stuff",
 	"timezone" : "America/Mexico_City"
 }
