@@ -38,6 +38,7 @@ $ ->
 		unless $scope.showPkmns.filter((e)->e.Number is $scope.selected)[0]?
 			$scope.showPkmns = []
 			$scope.showPkmns.push $scope.pokemons.filter((e)-> e.Number is $scope.selected)[0]
+			$scope.selected = ""
 		
 	$.get '/pokemons',(pokemons)->
 		$scope.pokemons = JSON.parse(JSON.stringify(pokemons))

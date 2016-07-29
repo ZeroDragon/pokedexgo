@@ -22,6 +22,7 @@ html
 	body#pokeapp
 		header
 			select(v-model="selected",v-on:change="addpkmn").pkselect
+				option(value="",disabled) Select a pokemon
 				option(v-for="pokemon in pokemons",value="{{pokemon.Number}}") {{pokemon.Name}}
 		.pokemons
 			.pokemon(v-for="pokemon in showPkmns")
