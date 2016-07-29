@@ -1,0 +1,81 @@
+//- html(manifest="/appcache.manifest")
+html
+	head
+		link(rel="apple-touch-icon" href="/images/ios/AppIcon.appiconset/Icon-App-60x60@2x.png")
+		link(rel="apple-touch-icon" sizes="180x180" href="/images/ios/AppIcon.appiconset/Icon-App-60x60@3x.png")
+		link(rel="apple-touch-icon" sizes="76x76" href="/images/ios/AppIcon.appiconset/Icon-App-76x76@1x.png")
+		link(rel="apple-touch-icon" sizes="152x152" href="/images/ios/AppIcon.appiconset/Icon-App-76x76@2x.png")
+
+		meta(name="viewport" content="initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1,width=device-width")
+		link(href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet',type='text/css')
+		link(rel="stylesheet",type="text/css",href="styles/main.css")
+		script(src="/scripts/jquery.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js")
+		script(src="/scripts/main.js")
+
+	body#pokeapp
+		header
+			select(v-model="selected",v-on:change="addpkmn").pkselect
+				option(v-for="pokemon in pokemons",value="{{pokemon.Number}}") {{pokemon.Name}}
+		.pokemons
+			.pokemon(v-for="pokemon in showPkmns")
+				table(cellpadding="0",cellspacing="0")
+					tr
+						td.conImage
+							.image(class="pkmn{{pokemon.Number}}")
+						td(style="width:100%;")
+							table(cellpadding="0",cellspacing="0")
+								tr: td(colspan="2").info
+									.name
+										|{{pokemon.Number}} {{pokemon.Name}}
+										.pkball.small.float-right.delete(data-name="{{pokemon.Name}}",v-on:click="deletePk")
+									.type
+										|{{pokemon.Classification}}
+									.center
+										.pkType(v-for="type in pokemon.types",class="{{type}}")
+											| {{type}}
+					tr: td(colspan="2").spacer
+					tr
+						tr: td(colspan="2").info
+							.name.alt Weaknesses
+							.center
+								.pkType(v-for="(type,value) in pokemon.weakRes",v-if="value>1",class="{{type}}") {{type}}
+					tr: td(colspan="2").spacer
+					tr
+						tr: td(colspan="2").info
+							.name.alt Resistances
+							.center
+								.pkType(v-for="(type,value) in pokemon.weakRes",v-if="value<1",class="{{type}}") {{type}}
+
+					tr: td(colspan="2").spacer
+					tr
+						tr: td(colspan="2").info
+							.name.alt Attack types
+							.center
+								.pkType(v-for="move in pokemon.attackingChart", class="{{move.type}}") {{move.type}}
+
+					
+					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").spacer
+					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").info
+						.name.alt Calculate evolution CP
+						.spacer
+						table(cellpadding="0",cellspacing="0")
+							tr
+								td
+									.calcInput
+										input(type="number",min="1",max="{{Math.floor(pokemon.maxCP)}}",placeholder="Current CP",class="value{{pokemon.Number}}").numberCalc
+										.calc(onClick="calculate('{{pokemon.Number}}')") Go
+
+						table(cellpadding="0",cellspacing="0")
+							tr
+								td.center
+									.pokemon.inner(v-for="(k,pok) in pokemon['Next evolution(s)']")
+										.image(class="pkmn{{pok.Number}}")
+										.center {{pok.Name}}
+										.center
+											|<b>{{getPkmn(pokemon.Number,k)['Next Evolution Requirements'].Amount}}</b> 
+											| {{getPkmn(pokemon.Number,k)['Next Evolution Requirements'].Name}}
+										.center(class="CPResult{{pok.Number}}")
+						.spacer
+
+		.bk(v-show="showPkmns.length == 0"): .pkball.big

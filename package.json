@@ -1,0 +1,15 @@
+{
+  "name": "pokego",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.coffee",
+  "scripts": {
+    "test": "nodemon",
+    "start" : "coffee app.coffee"
+  },
+  "author": "",
+  "license": "",
+  "dependencies": {
+  	"chaitea-framework" : "1.0.19"
+  }
+}

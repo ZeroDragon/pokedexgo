@@ -1,0 +1,203 @@
+@import "app/assets/styles/pokemons.styl"
+
+body
+	font-family Roboto, Sans-serif
+	background-color #FFF
+	margin 0
+	color #446
+	*
+		box-sizing border-box
+	.float-right
+		float right
+	.center
+		text-align center
+	&>header
+		background-color #8a8a8a
+		padding 10px
+		font-size 0
+		position fixed
+		top 0
+		left 0
+		width 100%
+		.addpkmn, .pkselect
+			height 30px
+			border-radius 4px
+			display inline-block
+			font-size 20px
+			line-height 30px
+			vertical-align middle
+			border none
+		.pkselect
+			-webkit-appearance none
+			-moz-appearance    none
+			appearance         none
+			width 100%
+			padding 0 5px
+			outline none
+			background-color #fff
+		.addpkmn
+			width 9%
+			background-color #70d089
+			text-align center
+			margin-left 1%
+			cursor pointer
+			&:hover
+				background-color darken(#70d089,10)
+				color #fff
+.pkball
+	background-image url("/images/pokeball.png")
+	background-size 100%
+	display inline-block
+	vertical-align top
+	&.small
+		width 20px
+		height 20px
+	&.big
+		width 300px
+		height 300px
+		position absolute
+		top 50%
+		left 50%
+		-webit-transform translate(-50%,-50%)
+		-moz-transform translate(-50%,-50%)
+		transform translate(-50%,-50%)
+		opacity 0.4
+.bk
+	position relative
+	height 600px
+	-webkit-filter grayscale(100%)
+	-moz-filter grayscale(100%)
+	filter grayscale(100%)
+
+.pkType
+	border 1px solid #000
+	border-radius 4px
+	text-align center
+	padding 4px
+	font-weight 900
+	color #fff
+	text-shadow 2px 2px #666
+	text-transform uppercase
+	letter-spacing 1px
+	margin 4px 5px
+	display inline-block
+	width 100px
+
+	&.Bug
+		background-color #88960e
+	&.Dark
+		background-color #3c2d23
+	&.Dragon
+		background-color #4e3ba4
+	&.Electric
+		background-color #e79302
+	&.Fairy
+		background-color #e08ee0
+	&.Fighting
+		background-color #5f2311
+	&.Fire
+		background-color #c72100
+	&.Flying
+		background-color #5d73d4
+	&.Ghost
+		background-color #454593
+	&.Grass
+		background-color #389a02
+	&.Ground
+		background-color #ad8c33
+	&.Ice
+		background-color #6dd3f5
+	&.Normal
+		background-color #ada594
+	&.Poison
+		background-color #6b246e
+	&.Psychic
+		background-color #dc3165
+	&.Rock
+		background-color #9e863d
+	&.Steel
+		background-color #8e8e9f
+	&.Water
+		background-color #0c67c2
+	
+
+.pokemons
+	margin-top 60px
+	
+	.pokemon
+		margin 0 10px 5px 10px
+		padding-bottom 5px
+		table
+			width 100%
+		.conImage
+			vertical-align middle
+		.image
+			margin auto
+			position relative
+			z-index -1
+			.delete
+				position absolute
+				top 0
+				left 0
+		.info
+			border 1px solid #000
+			border-radius 4px
+			width 80%
+			vertical-align top
+			.name
+				padding 4px
+				background-color #e27073
+				color #fff
+				border-bottom 4px solid #f699a1
+				&.alt
+					background-color #70a8e2
+					border-bottom 4px solid #99d4f6
+			.type
+				padding 4px
+		.spacer
+			width 100%
+			height 5px
+		.boxi
+			border 1px solid #000
+			border-radius 4px
+		.pkSize
+			td
+				text-align center
+				padding 4px 0
+			td.conborder
+				border-bottom 2px dashed #ccc
+			
+.pokemon.inner
+	position relative
+	border none
+	display inline-block
+
+.calcInput
+	font-size 0
+	padding 0 3px
+.numberCalc, .calc
+	height 30px
+	border-radius 4px
+	display inline-block
+	font-size 20px
+	line-height 30px
+	vertical-align middle
+	border none
+.numberCalc
+	-webkit-appearance none
+	-moz-appearance    none
+	appearance         none
+	width 90%
+	padding 0 5px
+	outline none
+	background-color #fff
+	border 1px solid #ccc
+.calc
+	width 9%
+	background-color #70d089
+	text-align center
+	margin-left 1%
+	cursor pointer
+	&:hover
+		background-color darken(#70d089,10)
+		color #fff
