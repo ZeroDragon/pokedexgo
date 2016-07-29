@@ -11,5 +11,8 @@
   "license": "",
   "dependencies": {
   	"chaitea-framework" : "1.0.19"
+  },
+	"engines": {
+    "node": "0.12.0"
   }
 }
