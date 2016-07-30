@@ -5,15 +5,16 @@
   "main": "app.coffee",
   "scripts": {
     "test": "nodemon",
-    "start" : "node start.js"
+    "start": "node start.js"
   },
   "author": "",
   "license": "",
   "dependencies": {
-  	"chaitea-framework" : "1.0.19",
-    "coffee-script" : "1.9.3"
+    "chaitea-framework": "1.0.19",
+    "coffee-script": "1.9.3",
+    "request": "^2.74.0"
   },
-	"engines": {
+  "engines": {
     "node": "0.12.0"
   }
 }

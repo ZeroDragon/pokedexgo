@@ -12,42 +12,185 @@ body
 	.center
 		text-align center
 	.footer
+		position absolute
+		bottom 20px
 		font-size 11px
+		color #fff
+		white-space	nowrap
 		a
-			color #446
-	&>header
-		background-color #8a8a8a
-		padding 10px
-		font-size 0
-		position fixed
-		top 0
-		left 0
+			color #fff
+		left 50%
+		-webit-transform translateX(-50%)
+		-moz-transform translateX(-50%)
+		transform translateX(-50%)
+		
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.cover
+	position fixed
+	top 0
+	left 0
+	width 100%
+	height 100%
+	background-color #e57373
+	z-index 2
+	.contenedor
+		position relative
 		width 100%
-		.addpkmn, .pkselect
-			height 30px
-			border-radius 4px
-			display inline-block
-			font-size 20px
-			line-height 30px
-			vertical-align middle
-			border none
-		.pkselect
-			-webkit-appearance none
-			-moz-appearance    none
-			appearance         none
-			width 100%
-			padding 0 5px
-			outline none
-			background-color #fff
-		.addpkmn
-			width 9%
-			background-color #70d089
-			text-align center
-			margin-left 1%
+		height 100%
+		overflow hidden
+	.line1
+		position absolute
+		top calc(9% + 49px)
+		right 0
+		border-top 2px solid #fff
+		border-left 2px solid #fff
+		border-top-left-radius 8px
+		width 95%
+		height 75%
+	.line2
+		position absolute
+		top calc(75% + 9% + 49px)
+		left 0
+		width calc(5% + 2px)
+		height 5%
+		border-right 2px solid #fff
+		border-bottom 2px solid #fff
+		border-bottom-right-radius 8px
+	.pokebola
+		width 200px
+		height 200px
+		border-radius 50%
+		position absolute
+		border 4px solid #000
+		bottom 20%
+		left calc(50% - 100px)
+		overflow hidden
+	
+
+	.pokebola
+		&:hover, &:focus, &:active
 			cursor pointer
-			&:hover
-				background-color darken(#70d089,10)
-				color #fff
+			.bottom, .line3
+				-webkit-animation spin 500ms linear infinite
+				-moz-animation spin 500ms linear infinite
+				animation spin 500ms linear infinite
+
+	.pokebola
+		.inner
+			position relative
+			width 100%
+			height 100%
+
+			.bottom
+				position absolute
+				width 100%
+				height 50%
+				bottom 0
+				left 0
+				background-color #fff
+				
+				border-bottom-left-radius 50% 100%
+				border-bottom-right-radius 50% 100%
+				-moz-transform-origin 50% 0
+				-webkit-transform-origin 50% 0
+				transform-origin 50% 0
+				
+			.line3
+				position absolute
+				bottom calc(50% - 3px)
+				left 0
+				width 100%
+				height 1px
+				border-top 6px solid #000
+
+			.whiteCircle, .blackCircle
+				position absolute
+				top 50%
+				left 50%
+				border-radius 50%
+				-webit-transform translate(-50%,-50%)
+				-moz-transform translate(-50%,-50%)
+				transform translate(-50%,-50%)
+			.whiteCircle
+				width 30%
+				height 30%
+				background-color #fff
+				border 4px solid #000
+			.blackCircle
+				border 2px solid #000
+				width 20%
+				height 20%
+	.screen
+		position absolute
+		background-color #fff
+		width 300px
+		margin auto
+		left 50%
+		top 9%
+		text-align center
+		font-size 50px
+		line-height 100px
+		letter-spacing 2px
+		border-radius 4px
+		-webit-transform translateX(-50%)
+		-moz-transform translateX(-50%)
+		transform translateX(-50%)
+		
+.sideTrigger
+	position fixed
+	top 0
+	right 0
+	height 100%
+	width 1px
+	background-color #e57373
+	z-index 1
+	cursor pointer
+	&:before
+		position absolute
+		top 79px
+		left -30px
+		content ' '
+		width 0
+		height 0
+		border-top 30px solid transparent
+		border-bottom 30px solid transparent
+		border-right 30px solid #e57373
+.sidePokemons
+	position fixed
+	top 0
+	right 0
+	height 100%
+	width 0
+	overflow hidden
+	z-index 1
+	background-color #fff
+	.ordenador
+		text-align center
+		background-color #2196F3
+		color #fff
+		padding 10px 0
+		font-size 14px
+		font-weight 300
+		text-transform uppercase
+		cursor pointer
+		white-space nowrap
+	.scroller
+		overflow auto
+		width 100%
+		height 93%
+		.pokemon
+			cursor pointer
+		.image
+			margin auto
+		.pkname
+			width 100%
+			white-space nowrap
+			overflow hidden
+			padding-left 6px
+			font-size 12px
 .pkball
 	background-image url("/images/pokeball.png")
 	background-size 100%
@@ -126,7 +269,7 @@ body
 	
 
 .pokemons
-	margin-top 60px
+	margin-top 10px
 	
 	.pokemon
 		margin 0 10px 5px 10px

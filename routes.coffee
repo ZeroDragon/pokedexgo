@@ -9,4 +9,6 @@ app.get '/pokemons', (req,res)->
 app.get '/multipliers', (req,res)->
 	res.sendFile "#{process.cwd()}/app/assets/scripts/multipliers.json"
 
+# app.get '/mapData/:lat/:lon', main.pkmnByLocation
+
 app.get '/', main.home

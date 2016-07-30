@@ -20,10 +20,31 @@ html
 		script(src="/scripts/main.js")
 
 	body#pokeapp
-		header
-			select(v-model="selected",v-on:change="addpkmn").pkselect
-				option(value="",disabled) Select a pokemon
-				option(v-for="pokemon in pokemons",value="{{pokemon.Number}}") {{pokemon.Name}}
+		.cover#cover
+			.contenedor
+				.line1
+				.line2
+				.screen {{time}}
+				.pokebola(v-on:click="hideCover"): .inner
+					.bottom
+					.line3
+					.whiteCircle
+					.blackCircle
+				.center.footer
+					|Version 1.0
+					br
+					|Made with love by ZeroDragon 
+					a(href="https://telegram.me/zerodragon",target="_blank") [telegram]
+					|  
+					a(href="https://twitter.com/zerodragon",target="_blank") [twitter]
+		.sideTrigger(v-on:click="toggleSidePokemons",style="right:{{sidePokemonsWidth}}px;")
+		.sidePokemons(style="width:{{sidePokemonsWidth}}px;")
+			.ordenador(v-on:click="pokemonOrder") By {{orden}}
+			.scroller
+				.pokSearch(v-for="pokemon in pokemons | orderBy orden")
+					.pokemon(v-on:click="addpkmn(pokemon.Number)")
+						.image(class="pkmn{{pokemon.Number}}")
+						.pkname {{pokemon.Number}} {{pokemon.Name}}
 		.pokemons
 			.pokemon(v-for="pokemon in showPkmns")
 				table(cellpadding="0",cellspacing="0")
@@ -86,9 +107,3 @@ html
 						.spacer
 
 		.bk(v-show="showPkmns.length == 0"): .pkball.big
-
-	.center.footer
-		|made with love by ZeroDragon 
-		a(href="https://telegram.me/zerodragon",target="_blank") [telegram]
-		|  
-		a(href="https://twitter.com/zerodragon",target="_blank") [twitter]
