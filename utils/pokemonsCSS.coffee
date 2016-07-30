@@ -1,15 +1,16 @@
 pokemons = require '../app/assets/scripts/pokemons.json'
 fs = require 'fs'
 
-cols = 16
-offset = 81
+cols = 10
+offsetX = 128
+offsetY = 128
 rules = [
 	"""
 	.pokemon
 	\t.image
-	\t\tbackground-image url("/images/pokemons.png")
-	\t\twidth 80px
-	\t\theight 80px
+	\t\tbackground-image url("/images/pokemons2.png")
+	\t\twidth 127px
+	\t\theight 127px
 	"""
 ]
 
@@ -18,7 +19,7 @@ for pokemon,k in pokemons
 	col = k % cols
 	rules.push """
 	\t\t&.pkmn#{pokemon.Number}
-	\t\t\tbackground-position #{(col*offset*-1)-1}px #{(row*offset*-1)-1}px
+	\t\t\tbackground-position #{(col*offsetX*-1)-1}px #{(row*offsetY*-1)-1}px
 	"""
 
 fs.writeFileSync '../app/assets/styles/pokemons.styl', rules.join('\n')

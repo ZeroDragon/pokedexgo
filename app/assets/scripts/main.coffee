@@ -24,6 +24,7 @@ $ ->
 	$scope.pokemons = []
 	$scope.showPkmns = []
 	orden = 0
+	timeout = false
 	$scope.orden = "Number"
 	$scope.sidePokemonsWidth = 0
 
@@ -32,6 +33,7 @@ $ ->
 			left : '-100%'
 		},100,'linear',->
 			$('#cover').remove()
+			clearTimeout timeout
 		)
 
 	doTimeout = ->
@@ -51,7 +53,7 @@ $ ->
 		$scope.orden = oA[orden]
 
 	$scope.toggleSidePokemons = ->
-		goal = if $scope.sidePokemonsWidth is 0 then 100 else 0
+		goal = if $scope.sidePokemonsWidth is 0 then 140 else 0
 		$({t:$scope.sidePokemonsWidth}).animate {
 			t : goal
 		},{

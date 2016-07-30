@@ -2,7 +2,7 @@
 
 body
 	font-family Roboto, Sans-serif
-	background-color #FFF
+	background-color #fafaff
 	margin 0
 	color #446
 	*
@@ -23,10 +23,6 @@ body
 		-webit-transform translateX(-50%)
 		-moz-transform translateX(-50%)
 		transform translateX(-50%)
-		
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .cover
 	position fixed
@@ -41,6 +37,15 @@ body
 		width 100%
 		height 100%
 		overflow hidden
+	.triangle
+		position absolute
+		top 84px
+		right 0
+		width 0
+		height 0
+		border-top 30px solid transparent
+		border-bottom 30px solid transparent
+		border-right 30px solid #fff
 	.line1
 		position absolute
 		top calc(9% + 49px)
@@ -68,17 +73,9 @@ body
 		bottom 20%
 		left calc(50% - 100px)
 		overflow hidden
-	
 
 	.pokebola
-		&:hover, &:focus, &:active
-			cursor pointer
-			.bottom, .line3
-				-webkit-animation spin 500ms linear infinite
-				-moz-animation spin 500ms linear infinite
-				animation spin 500ms linear infinite
-
-	.pokebola
+		cursor pointer
 		.inner
 			position relative
 			width 100%
@@ -150,7 +147,7 @@ body
 	cursor pointer
 	&:before
 		position absolute
-		top 79px
+		top 84px
 		left -30px
 		content ' '
 		width 0

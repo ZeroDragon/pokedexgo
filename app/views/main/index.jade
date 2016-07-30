@@ -25,6 +25,7 @@ html
 				.line1
 				.line2
 				.screen {{time}}
+				.triangle
 				.pokebola(v-on:click="hideCover"): .inner
 					.bottom
 					.line3
@@ -56,7 +57,6 @@ html
 								tr: td(colspan="2").info
 									.name
 										|{{pokemon.Number}} {{pokemon.Name}}
-										.pkball.small.float-right.delete(data-name="{{pokemon.Name}}",v-on:click="deletePk")
 									.type
 										|{{pokemon.Classification}}
 									.center
