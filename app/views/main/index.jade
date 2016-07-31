@@ -50,18 +50,14 @@ html
 			.pokemon(v-for="pokemon in showPkmns")
 				table(cellpadding="0",cellspacing="0")
 					tr
-						td.conImage
+						td(colspan="2")
 							.image(class="pkmn{{pokemon.Number}}")
-						td(style="width:100%;")
-							table(cellpadding="0",cellspacing="0")
-								tr: td(colspan="2").info
-									.name
-										|{{pokemon.Number}} {{pokemon.Name}}
-									.type
-										|{{pokemon.Classification}}
-									.center
-										.pkType(v-for="type in pokemon.types",class="{{type}}")
-											| {{type}}
+							.type.center
+								|{{pokemon.Number}} {{pokemon.Name}}
+								br
+								|Max CP: {{addCommas(Math.floor(pokemon.maxCP))}}
+								br
+								.pkType(v-for="type in pokemon.types",class="{{type}}") {{type}}
 					tr: td(colspan="2").spacer
 					tr
 						tr: td(colspan="2").info
@@ -91,7 +87,7 @@ html
 							tr
 								td
 									.calcInput
-										input(type="number",min="1",max="{{Math.floor(pokemon.maxCP)}}",placeholder="Current CP",class="value{{pokemon.Number}}").numberCalc
+										input(type="number",min="1",placeholder="Current CP",class="value{{pokemon.Number}}").numberCalc
 										.calc(onClick="calculate('{{pokemon.Number}}')") Go
 
 						table(cellpadding="0",cellspacing="0")
@@ -99,11 +95,12 @@ html
 								td.center
 									.pokemon.inner(v-for="(k,pok) in pokemon['Next evolution(s)']")
 										.image(class="pkmn{{pok.Number}}")
-										.center {{pok.Name}}
+										.center {{pok.Number}} {{pok.Name}}
+										.center Max CP: {{addCommas(Math.floor(getPkmn(pok.Number,0).maxCP))}}
 										.center
 											|<b>{{getPkmn(pokemon.Number,k)['Next Evolution Requirements'].Amount}}</b> 
 											| {{getPkmn(pokemon.Number,k)['Next Evolution Requirements'].Name}}
 										.center(class="CPResult{{pok.Number}}")
 						.spacer
-
+		.overfloat hola
 		.bk(v-show="showPkmns.length == 0"): .pkball.big

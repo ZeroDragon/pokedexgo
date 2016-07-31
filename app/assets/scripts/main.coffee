@@ -1,5 +1,11 @@
 $scope = {}
 $methods = {}
+
+addCommas = (x)->
+	parts = x.toString().split(".")
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	return parts.join(".")
+
 calculateFromNumber = (number,cp)->
 	pkmn = $scope.pokemons.filter((e)->e.Number is number)[0]
 	if pkmn.multipliers?
@@ -8,12 +14,12 @@ calculateFromNumber = (number,cp)->
 	if number isnt "133" #stupid eevee
 		if pkmn['Next evolution(s)'][0]?
 			next = pkmn['Next evolution(s)'][0].Number
-			$(".CPResult#{next}").html min+"<b> CP</b>  "+max+"<b> CP</b>"
+			$(".CPResult#{next}").html addCommas(min)+"<b> CP </b> ~ "+addCommas(max)+"<b> CP</b>"
 			calculateFromNumber next, (min+max)/2
 	else
-		$(".CPResult134").html min+"<b> CP</b>  "+max+"<b> CP</b>"
-		$(".CPResult135").html min+"<b> CP</b>  "+max+"<b> CP</b>"
-		$(".CPResult136").html min+"<b> CP</b>  "+max+"<b> CP</b>"
+		$(".CPResult134").html addCommas(min)+"<b> CP</b> ~ "+addCommas(max)+"<b> CP</b>"
+		$(".CPResult135").html addCommas(min)+"<b> CP</b> ~ "+addCommas(max)+"<b> CP</b>"
+		$(".CPResult136").html addCommas(min)+"<b> CP</b> ~ "+addCommas(max)+"<b> CP</b>"
 
 calculate = (number)->
 	calculateFromNumber number, ~~$(".value#{number}").val()
@@ -28,6 +34,8 @@ $ ->
 	$scope.orden = "Number"
 	$scope.sidePokemonsWidth = 0
 
+	$methods.addCommas = addCommas
+
 	$scope.hideCover = ->
 		$('#cover').animate({
 			left : '-100%'
@@ -35,6 +43,7 @@ $ ->
 			$('#cover').remove()
 			clearTimeout timeout
 		)
+	$scope.hideCover()
 
 	doTimeout = ->
 		d = new Date()
@@ -80,7 +89,7 @@ $ ->
 		
 	$.get '/pokemons',(pokemons)->
 		$scope.pokemons = JSON.parse(JSON.stringify(pokemons))
-		# $scope.showPkmns.push $scope.pokemons.filter((e)-> e.Number is "001")[0]
+		$scope.showPkmns.push $scope.pokemons.filter((e)-> e.Number is "001")[0]
 
 	$scope.deletePk = (event)->
 		name = $(event.target).data('name')
