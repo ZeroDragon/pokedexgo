@@ -1,6 +1,19 @@
 $scope = {}
 $methods = {}
 
+fromMem = localStorage.pokedexGo
+if !fromMem?
+	fromMem = {
+		savingPokemon : false
+		lastPokemon : null
+		calculatedCP : null
+	}
+else
+	fromMem = JSON.parse fromMem
+saveMem = ->
+	console.log fromMem
+	localStorage.pokedexGo = JSON.stringify fromMem
+
 addCommas = (x)->
 	parts = x.toString().split(".")
 	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -22,6 +35,10 @@ calculateFromNumber = (number,cp)->
 		$(".CPResult136").html addCommas(min)+"<b> CP</b> ~ "+addCommas(max)+"<b> CP</b>"
 
 calculate = (number)->
+	if fromMem.savingPokemon
+		fromMem.lastPokemon = number
+		fromMem.calculatedCP = ~~$(".value#{number}").val()
+		saveMem()
 	calculateFromNumber number, ~~$(".value#{number}").val()
 
 addZ = (i,k=3)-> ([0..k].map((e)->'0').join('')+i).slice(-k)
@@ -33,6 +50,7 @@ $ ->
 	timeout = false
 	$scope.orden = "Number"
 	$scope.sidePokemonsWidth = 0
+	$scope.isSaving = false
 
 	$methods.addCommas = addCommas
 
@@ -43,7 +61,6 @@ $ ->
 			$('#cover').remove()
 			clearTimeout timeout
 		)
-	$scope.hideCover()
 
 	doTimeout = ->
 		d = new Date()
@@ -55,6 +72,19 @@ $ ->
 			doTimeout()
 		,1000
 	doTimeout()
+
+	$scope.toggleSettings = ->
+		$('#settings').toggle()
+	$scope.toggleSaveData = ->
+		$scope.isSaving = !$scope.isSaving
+		fromMem.savingPokemon = $scope.isSaving
+		if !fromMem.savingPokemon
+			fromMem = {
+				savingPokemon : false
+				lastPokemon : null
+				calculatedCP : null
+			}
+		saveMem()
 
 	$scope.pokemonOrder = ->
 		oA = ["Number","Name"]
@@ -86,10 +116,21 @@ $ ->
 		$scope.toggleSidePokemons()
 		$scope.showPkmns = []
 		$scope.showPkmns.push $scope.pokemons.filter((e)-> e.Number is selected)[0]
+		fromMem.lastPokemon = selected
+		saveMem()
 		
 	$.get '/pokemons',(pokemons)->
 		$scope.pokemons = JSON.parse(JSON.stringify(pokemons))
-		$scope.showPkmns.push $scope.pokemons.filter((e)-> e.Number is "001")[0]
+		
+		if fromMem.savingPokemon is true
+			$scope.showPkmns.push $scope.pokemons.filter((e)-> e.Number is fromMem.lastPokemon)[0]
+			if fromMem.calculatedCP?
+				setTimeout ->
+					$('.numberCalc').val(fromMem.calculatedCP)
+					calculate(fromMem.lastPokemon)
+				,100
+			$scope.isSaving = fromMem.savingPokemon
+			$scope.hideCover()
 
 	$scope.deletePk = (event)->
 		name = $(event.target).data('name')

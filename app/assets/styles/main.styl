@@ -18,11 +18,18 @@ body
 		color #fff
 		white-space	nowrap
 		a
-			color #fff
+			color inherit
+		&.dark
+			color #446
 		left 50%
 		-webit-transform translateX(-50%)
 		-moz-transform translateX(-50%)
 		transform translateX(-50%)
+	.spacer
+		width 100%
+		height 5px
+		&.big
+			height 50px
 
 .cover
 	position fixed
@@ -213,6 +220,7 @@ body
 	-webkit-filter grayscale(100%)
 	-moz-filter grayscale(100%)
 	filter grayscale(100%)
+	z-index -1
 
 .pkType
 	border 1px solid #000
@@ -264,7 +272,72 @@ body
 		background-color #8e8e9f
 	&.Water
 		background-color #0c67c2
-	
+
+.cog
+	position absolute
+	top 40px
+	left 40px
+	cursor pointer
+	img
+		width 30px
+.settings
+	position fixed
+	display none
+	padding 30px 50px
+	top 0
+	left 0
+	width 100%
+	height 100%
+	background linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)
+	z-index 2
+	overflow auto
+	table
+		width 100%
+		color #fff
+		font-size 20px
+	.title
+		text-align center
+		font-size 30px
+	.label
+		width 100%
+		white-space nowrap
+		overflow hidden
+		text-overflow ellipsis
+	.close
+		width 40px
+		height 40px
+		font-size 25px
+		line-height 39px
+		border 2px solid #fff
+		border-radius 50%
+		color #fff
+		text-align center
+		position absolute
+		bottom 40px
+		left calc(50% - 20px)
+		padding-left 1px
+		cursor pointer
+	.toggleHolder
+		width 40px
+		height 20px
+		border 2px solid #fff
+		border-radius 10px
+		position relative
+		overflow hidden
+		cursor pointer
+		.toggle
+			position absolute
+			width 20px
+			height 20px
+			top -2
+			border-radius 50%
+			&.off
+				left -2
+				background-color #aaa
+			&.on
+				right -2
+				background-color #fff
+		
 
 .pokemons
 	.pokemon
@@ -297,9 +370,6 @@ body
 					border-bottom 4px solid #99d4f6
 			.type
 				padding 4px
-		.spacer
-			width 100%
-			height 5px
 		.boxi
 			border 1px solid #000
 			border-radius 4px

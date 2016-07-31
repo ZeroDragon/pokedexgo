@@ -46,6 +46,21 @@ html
 					.pokemon(v-on:click="addpkmn(pokemon.Number)")
 						.image(class="pkmn{{pokemon.Number}}")
 						.pkname {{pokemon.Number}} {{pokemon.Name}}
+		.cog(v-on:click="toggleSettings"): img(src="/images/cog.png")
+		.settings#settings
+			table(cellpadding="0",cellspacing="0")
+				tr
+					td(colspan="2").title Settings
+				tr: td(colspan="").spacer.big
+				tr
+					td: .label Keep last pokemon
+					td
+						.toggleHolder(v-on:click="toggleSaveData"): .toggle(class="{{isSaving?'on':'off'}}")
+				tr: td(colspan="").spacer.big
+				tr
+					td(colspan="2"): .label More settings coming soon.. maybe
+			.close(v-on:click="toggleSettings") X
+
 		.pokemons
 			.pokemon(v-for="pokemon in showPkmns")
 				table(cellpadding="0",cellspacing="0")
@@ -102,5 +117,13 @@ html
 											| {{getPkmn(pokemon.Number,k)['Next Evolution Requirements'].Name}}
 										.center(class="CPResult{{pok.Number}}")
 						.spacer
-		.overfloat hola
-		.bk(v-show="showPkmns.length == 0"): .pkball.big
+
+		.bk(v-show="showPkmns.length == 0")
+			.pkball.big
+			.center.footer.dark
+				|Version 1.0.1
+				br
+				|Made with love by ZeroDragon 
+				a(href="https://telegram.me/zerodragon",target="_blank") [telegram]
+				|  
+				a(href="https://twitter.com/zerodragon",target="_blank") [twitter]
