@@ -41,6 +41,7 @@ html
 				.center.footer
 					+footer
 		.sideTrigger(v-on:click="toggleSidePokemons",style="right:{{sidePokemonsWidth}}px;")
+			.button: .inner1: .inner2: .inner3: .inner4: .inner5
 		.sidePokemons(style="width:{{sidePokemonsWidth}}px;")
 			.ordenador(v-on:click="pokemonOrder") By {{orden}}
 			.scroller
@@ -119,6 +120,6 @@ html
 
 		.bk(v-show="showPkmns.length == 0")
 			.arrow: img(src="/images/arrow.png")
-			.pkball.big
+			//- .pkball.big
 			.center.footer.dark
 				+footer

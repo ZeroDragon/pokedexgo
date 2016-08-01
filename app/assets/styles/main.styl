@@ -49,6 +49,7 @@ body
 		-webkit-animation-name bounceInRight
 
 .cover
+	display none
 	position fixed
 	top 0
 	left 0
@@ -166,19 +167,53 @@ body
 	right 0
 	height 100%
 	width 1px
-	background-color #e57373
+	background-color #555
 	z-index 1
 	cursor pointer
-	&:before
+	.button
 		position absolute
-		top 84px
-		left -30px
-		content ' '
-		width 0
-		height 0
-		border-top 30px solid transparent
-		border-bottom 30px solid transparent
-		border-right 30px solid #e57373
+		width 47px
+		height 94px
+		border-top-left-radius 94px
+		border-bottom-left-radius 94px
+		top 68px
+		left -47px
+		border 6px solid #555
+		border-right none
+		.inner1, .inner2, .inner3, .inner4, .inner5
+			position absolute
+			border-top-left-radius 70px
+			border-bottom-left-radius 70px
+			right 0
+		.inner1
+			width 35px
+			height 70px
+			top calc(50% - 35px)
+			background-color #555
+		.inner2
+			width 24px
+			height 48px
+			top calc(50% - 24px)
+			background-color #000
+		.inner3
+			width 20px
+			height 40px
+			top calc(50% - 20px)
+			background-color #008acc
+		.inner4
+			width 15px
+			height 30px
+			top calc(50% - 15px)
+			background-color #00adff
+		.inner5
+			width 15px
+			height 15px
+			top calc(50% - 10px)
+			border-radius 50%
+			background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(0,173,255,0.28) 72%, rgba(0,173,255,0) 100%);
+			background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(0,173,255,0.28) 72%,rgba(0,173,255,0) 100%);
+			background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(0,173,255,0.28) 72%,rgba(0,173,255,0) 100%);
+
 .sidePokemons
 	position fixed
 	top 0
