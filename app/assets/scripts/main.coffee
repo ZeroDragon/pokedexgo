@@ -92,6 +92,7 @@ $ ->
 		$scope.orden = oA[orden]
 
 	$scope.toggleSidePokemons = ->
+		$('.arrow').remove()
 		goal = if $scope.sidePokemonsWidth is 0 then 140 else 0
 		$({t:$scope.sidePokemonsWidth}).animate {
 			t : goal
