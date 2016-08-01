@@ -31,24 +31,14 @@ body
 		&.big
 			height 50px
 
-@keyframes bounceInRight {
-	0% {opacity:0;transform:translateX(0);}
-	30% {opacity:1;transform:translateX(-30px);}
-	70% {opacity:1;transform:translateX(10px);}
-	100% {opacity:0;transform:translateX(0);}
+@keyframes glow {
+	0% {width:47px;height:94px;}
+	20% {width:94px;height:188px;top calc(50% - 94px);opacity:0;}
+	100% {width:94px;height:188px;top calc(50% - 94px);opacity:0;}
 }
 
-.arrow
-	position absolute
-	top 100px
-	right 50px
-	img
-		opacity 0
-		width 60px
-		-webkit-animation 3s infinite
-		-webkit-animation-name bounceInRight
-
 .cover
+	display none
 	position fixed
 	top 0
 	left 0
@@ -179,11 +169,19 @@ body
 		left -47px
 		border 6px solid #555
 		border-right none
-		.inner1, .inner2, .inner3, .inner4, .inner5
+		.inner0, .inner1, .inner2, .inner3, .inner4, .inner5
 			position absolute
-			border-top-left-radius 70px
-			border-bottom-left-radius 70px
+			border-top-left-radius 188px
+			border-bottom-left-radius 188px
 			right 0
+		.inner0
+			width 47px
+			height 94px
+			top calc(50% - 47px)
+			border 1px solid #00adff
+			border-right none
+			-webkit-animation 5s infinite
+			-webkit-animation-name glow
 		.inner1
 			width 35px
 			height 70px
