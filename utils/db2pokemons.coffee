@@ -67,18 +67,19 @@ pokemons = pokemons.map (pokemon)->
 	pokemon.weakRes = JSON.parse(JSON.stringify(all))
 	pkmn = database.Pokemon.filter((e)-> e.TemplateId.indexOf("V#{addZ(pokemon.Number,4)}") isnt -1)[0]
 	moves_q = pkmn.Pokemon.QuickMoves
-	moves_p = pokemon.types.map((pkType)->
-		database.Moves.filter((e)->
-			e.Move.Type is "POKEMON_TYPE_#{pkType.toUpperCase()}" and
-			e.TemplateId.indexOf("_FAST") is -1
-		).map((move)->
-			return ~~move.TemplateId.match(/[0-9]{4}/)[0]
-		)
-	)
-	mp = []
-	for moves in moves_p
-		mp = mp.concat moves
-	moves_p = mp
+	moves_p = pkmn.Pokemon.CinematicMoves
+	# moves_p = pokemon.types.map((pkType)->
+	# 	database.Moves.filter((e)->
+	# 		e.Move.Type is "POKEMON_TYPE_#{pkType.toUpperCase()}" and
+	# 		e.TemplateId.indexOf("_FAST") is -1
+	# 	).map((move)->
+	# 		return ~~move.TemplateId.match(/[0-9]{4}/)[0]
+	# 	)
+	# )
+	# mp = []
+	# for moves in moves_p
+	# 	mp = mp.concat moves
+	# moves_p = mp
 
 	moves = [].concat(moves_q,moves_p).map((e)->
 		move = database.Moves.filter((move)->
