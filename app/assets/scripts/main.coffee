@@ -1,6 +1,10 @@
 $scope = {}
 $methods = {}
 
+stardustCost = []
+for mult in [2,4,6,8,10,13,16,19,22,25,30,35,40,45,50,60,70,80,90,100]
+	stardustCost.push(mult*100) for repeat in [1,2]
+
 fromMem = localStorage.pokedexGo
 if !fromMem?
 	fromMem = {
@@ -11,7 +15,6 @@ if !fromMem?
 else
 	fromMem = JSON.parse fromMem
 saveMem = ->
-	console.log fromMem
 	localStorage.pokedexGo = JSON.stringify fromMem
 
 addCommas = (x)->
@@ -51,6 +54,9 @@ $ ->
 	$scope.orden = "Number"
 	$scope.sidePokemonsWidth = 0
 	$scope.isSaving = false
+	$scope.requiredStardust = null
+	$scope.trainerLevel = null
+	$scope.stimatedLvl = []
 
 	$methods.addCommas = addCommas
 
@@ -102,6 +108,34 @@ $ ->
 			step : (now)-> $scope.sidePokemonsWidth = now
 		}
 
+	calculateLvl = (val,old)->
+		$scope.stimatedLvl = []
+		maxlvl = 40
+		if ~~$scope.trainerLevel > 0
+			maxlvl = ~~$scope.trainerLevel+1.5
+		posLvl = stardustCost.map((e,k)-> return k+1 if e is ~~$scope.requiredStardust).filter((e)->e? and e < maxlvl)
+		nPos = []
+		for pos in posLvl
+			for ad in [0,0.5]
+				nPos.push pos + ad
+		$scope.stimatedLvl = nPos
+
+	$watch = {
+		requiredStardust : calculateLvl
+		trainerLevel : calculateLvl
+	}
+
+	$scope.outputLvl = (arr)->
+		arr = JSON.parse(JSON.stringify(arr))
+		if arr.length > 0
+			r = ""
+			last = "<b>#{arr.pop()}</b>"
+			if arr.length > 0
+				r = arr.map((e)->"<b>#{e}</b>").join(', ') + " and " + last
+			else
+				return last
+		else
+			return null
 
 	$methods.getPkmn = (number,evoK)->
 		pkmn = $scope.pokemons.filter((e)->e.Number is addZ(number))[0]
@@ -127,7 +161,7 @@ $ ->
 			$scope.showPkmns.push $scope.pokemons.filter((e)-> e.Number is fromMem.lastPokemon)[0]
 			if fromMem.calculatedCP?
 				setTimeout ->
-					$('.numberCalc').val(fromMem.calculatedCP)
+					$('#initialCP').val(fromMem.calculatedCP)
 					calculate(fromMem.lastPokemon)
 				,100
 			$scope.isSaving = fromMem.savingPokemon
@@ -141,4 +175,5 @@ $ ->
 		el: '#pokeapp'
 		data: $scope
 		methods: $methods
+		watch: $watch
 	})

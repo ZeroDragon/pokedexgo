@@ -95,6 +95,27 @@ html
 							.center
 								.pkType(v-for="move in pokemon.attackingChart", class="{{move.type}}") {{move.type}}
 
+					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").spacer
+					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").info
+						.name.alt Estimate level
+						.spacer
+						table(cellpadding="0",cellspacing="0")
+							tr
+								td
+									.calcInput
+										input(type="number",placeholder="Required stardust",v-model="requiredStardust").numberCalc.dos
+							tr: td.spacer
+							tr
+								td
+									.calcInput
+										input(type="number",placeholder="Trainer level",v-model="trainerLevel").numberCalc.dos
+							tr(v-show="stimatedLvl.length > 0"): td.spacer
+							tr(v-show="stimatedLvl.length > 0")
+								td: .center
+									|{{pokemon.Name}}'s level is between
+									br
+									|{{{outputLvl(stimatedLvl)}}}
+						.spacer
 					
 					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").spacer
 					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").info
@@ -104,7 +125,7 @@ html
 							tr
 								td
 									.calcInput
-										input(type="number",min="1",placeholder="Current CP",class="value{{pokemon.Number}}").numberCalc
+										input(type="number",placeholder="Current CP",class="value{{pokemon.Number}}")#initialCP.numberCalc
 										.calc(onClick="calculate('{{pokemon.Number}}')") Go
 
 						table(cellpadding="0",cellspacing="0")
