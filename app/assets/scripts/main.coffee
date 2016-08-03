@@ -1,10 +1,6 @@
 $scope = {}
 $methods = {}
 
-stardustCost = []
-for mult in [2,4,6,8,10,13,16,19,22,25,30,35,40,45,50,60,70,80,90,100]
-	stardustCost.push(mult*100) for repeat in [1,2]
-
 fromMem = localStorage.pokedexGo
 if !fromMem?
 	fromMem = {
@@ -55,8 +51,10 @@ $ ->
 	$scope.sidePokemonsWidth = 0
 	$scope.isSaving = false
 	$scope.requiredStardust = null
-	$scope.trainerLevel = null
-	$scope.stimatedLvl = []
+	$scope.hitPoints = null
+	$scope.combatPower = null
+	$scope.upgraded = false
+	$scope.calculatedIV = null
 
 	$methods.addCommas = addCommas
 
@@ -108,22 +106,13 @@ $ ->
 			step : (now)-> $scope.sidePokemonsWidth = now
 		}
 
-	calculateLvl = (val,old)->
-		$scope.stimatedLvl = []
-		maxlvl = 40
-		if ~~$scope.trainerLevel > 0
-			maxlvl = ~~$scope.trainerLevel+1.5
-		posLvl = stardustCost.map((e,k)-> return k+1 if e is ~~$scope.requiredStardust).filter((e)->e? and e < maxlvl)
-		nPos = []
-		for pos in posLvl
-			for ad in [0,0.5]
-				nPos.push pos + ad
-		$scope.stimatedLvl = nPos
-
-	$watch = {
-		requiredStardust : calculateLvl
-		trainerLevel : calculateLvl
-	}
+	$scope.calculateIV = ->
+		number = ~~$scope.showPkmns[0].Number
+		if ~~$scope.combatPower isnt 0 and ~~$scope.hitPoints isnt 0 and ~~$scope.requiredStardust isnt 0
+			calc = ivCalculator.evaluate(number,~~$scope.combatPower,~~$scope.hitPoints,~~$scope.requiredStardust,$scope.upgraded)
+			calc.levels = calc.ivs.map((e)->e.level).filter (e,k,s)-> s.indexOf(e) is k
+			console.log JSON.parse(JSON.stringify(calc)) 
+			$scope.calculatedIV = calc
 
 	$scope.outputLvl = (arr)->
 		arr = JSON.parse(JSON.stringify(arr))
@@ -150,6 +139,7 @@ $ ->
 	$methods.addpkmn = (selected)->
 		$scope.toggleSidePokemons()
 		$scope.showPkmns = []
+		$scope.calculatedIV = null
 		$scope.showPkmns.push $scope.pokemons.filter((e)-> e.Number is selected)[0]
 		fromMem.lastPokemon = selected
 		saveMem()
@@ -175,5 +165,4 @@ $ ->
 		el: '#pokeapp'
 		data: $scope
 		methods: $methods
-		watch: $watch
 	})

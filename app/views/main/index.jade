@@ -24,6 +24,7 @@ html
 		link(rel="stylesheet",type="text/css",href="styles/main.css")
 		script(src="/scripts/jquery.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js")
+		script(src="/scripts/ivCalculator.js")
 		script(src="/scripts/main.js")
 
 	body#pokeapp
@@ -94,28 +95,6 @@ html
 							.name.alt Attack types
 							.center
 								.pkType(v-for="move in pokemon.attackingChart", class="{{move.type}}") {{move.type}}
-
-					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").spacer
-					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").info
-						.name.alt Estimate level
-						.spacer
-						table(cellpadding="0",cellspacing="0")
-							tr
-								td
-									.calcInput
-										input(type="number",placeholder="Required stardust",v-model="requiredStardust").numberCalc.dos
-							tr: td.spacer
-							tr
-								td
-									.calcInput
-										input(type="number",placeholder="Trainer level",v-model="trainerLevel").numberCalc.dos
-							tr(v-show="stimatedLvl.length > 0"): td.spacer
-							tr(v-show="stimatedLvl.length > 0")
-								td: .center
-									|{{pokemon.Name}}'s level is between
-									br
-									|{{{outputLvl(stimatedLvl)}}}
-						.spacer
 					
 					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").spacer
 					tr(v-if="pokemon['Next evolution(s)'].length > 0"): td(colspan="2").info
@@ -139,6 +118,59 @@ html
 											|<b>{{getPkmn(pokemon.Number,k)['Next Evolution Requirements'].Amount}}</b> 
 											| {{getPkmn(pokemon.Number,k)['Next Evolution Requirements'].Name}}
 										.center(class="CPResult{{pok.Number}}")
+						.spacer
+
+					tr: td(colspan="2").spacer
+					tr: td(colspan="2").info
+						.name.alt IV's Calculator
+						.spacer
+						table(cellpadding="0",cellspacing="0")
+							tr
+								td
+									.calcInput
+										input(type="number",placeholder="Required stardust",v-model="requiredStardust").numberCalc.dos
+							tr: td.spacer
+							tr
+								td
+									.calcInput
+										input(type="number",placeholder="Hit points",v-model="hitPoints").numberCalc.dos
+							tr: td.spacer
+							tr
+								td
+									.calcInput
+										input(type="number",placeholder="Combat power",v-model="combatPower").numberCalc.dos
+							tr: td.spacer
+							tr
+								td
+									label.calcInput(style="font-size:inherit;")
+										| Upgraded?
+										input(type="checkbox",v-model="upgraded")
+									.calc(v-on:click="calculateIV") Go
+							tr(v-show="calculatedIV"): td: hr
+							tr(v-show="calculatedIV"): td.left
+								| &nbsp;Pokemon grade: {{calculatedIV.grade.explanation}}
+								br
+								| &nbsp;Estimated lvl(s): {{calculatedIV.levels.join(', ')}}
+							tr(v-show="calculatedIV"): td.spacer
+							tr(v-show="calculatedIV"): td: table(cellpadding="0",cellspacing="0")
+								thead(v-for="combo in calculatedIV.ivs").zebra
+									tr
+										td(colspan="2",style="border-bottom:2px solid #666;font-size:10px;") &nbsp;
+									tr
+										td &nbsp;Level
+										td {{combo.level}}
+									tr
+										td &nbsp;Perfection
+										td {{combo.perfection}}%
+									tr
+										td &nbsp;Attack IV
+										td {{combo.attackIV}}
+									tr
+										td &nbsp;Defense IV
+										td {{combo.defenseIV}}
+									tr
+										td &nbsp;Stamina
+										td {{combo.staminaIV}}
 						.spacer
 
 		.bk(v-show="showPkmns.length == 0")

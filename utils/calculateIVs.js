@@ -1,0 +1,1 @@
+ivCalculator = require('pokemon-go-iv-calculator');

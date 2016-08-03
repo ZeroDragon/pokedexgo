@@ -12,6 +12,7 @@
   "dependencies": {
     "chaitea-framework": "1.0.19",
     "coffee-script": "1.9.3",
+    "pokemon-go-iv-calculator": "^0.3.2",
     "request": "^2.74.0"
   },
   "engines": {
