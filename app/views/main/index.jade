@@ -146,31 +146,30 @@ html
 										| Upgraded?
 										input(type="checkbox",v-model="upgraded")
 									.calc(v-on:click="calculateIV") Go
-							tr(v-show="calculatedIV"): td: hr
-							tr(v-show="calculatedIV"): td.left
-								| &nbsp;Pokemon grade: {{calculatedIV.grade.explanation}}
-								br
-								| &nbsp;Estimated lvl(s): {{calculatedIV.levels.join(', ')}}
-							tr(v-show="calculatedIV"): td.spacer
-							tr(v-show="calculatedIV"): td: table(cellpadding="0",cellspacing="0")
-								thead(v-for="combo in calculatedIV.ivs").zebra
+							tr(v-show="calculatedIV"): td.ivHolder
+								.ivChart
+									.bak(style="width:{{calculatedIV.prom*10}}%;")
+									img(src="/images/stars.png")
+							tr: td: table(cellpadding="0",cellspacing="0")
+								tbody(v-for="combo in calculatedIV.ivs").zebra
 									tr
 										td(colspan="2",style="border-bottom:2px solid #666;font-size:10px;") &nbsp;
 									tr
 										td &nbsp;Level
-										td {{combo.level}}
+										td {{combo.lvl}}
 									tr
 										td &nbsp;Perfection
-										td {{combo.perfection}}%
+										td {{combo.grade*10}}%
 									tr
 										td &nbsp;Attack IV
-										td {{combo.attackIV}}
+										td {{combo.Atk}}
 									tr
 										td &nbsp;Defense IV
-										td {{combo.defenseIV}}
+										td {{combo.Def}}
 									tr
 										td &nbsp;Stamina
-										td {{combo.staminaIV}}
+										td {{combo.Sta}}
+							
 						.spacer
 
 		.bk(v-show="showPkmns.length == 0")

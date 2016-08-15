@@ -109,9 +109,8 @@ $ ->
 	$scope.calculateIV = ->
 		number = ~~$scope.showPkmns[0].Number
 		if ~~$scope.combatPower isnt 0 and ~~$scope.hitPoints isnt 0 and ~~$scope.requiredStardust isnt 0
-			calc = ivCalculator.evaluate(number,~~$scope.combatPower,~~$scope.hitPoints,~~$scope.requiredStardust,$scope.upgraded)
-			calc.levels = calc.ivs.map((e)->e.level).filter (e,k,s)-> s.indexOf(e) is k
-			console.log JSON.parse(JSON.stringify(calc)) 
+			calc = getIVs(number,~~$scope.requiredStardust,~~$scope.combatPower,~~$scope.hitPoints,$scope.upgraded)
+			calc.levels = calc.ivs.map((e)->e.lvl).filter (e,k,s)-> s.indexOf(e) is k
 			$scope.calculatedIV = calc
 
 	$scope.outputLvl = (arr)->
