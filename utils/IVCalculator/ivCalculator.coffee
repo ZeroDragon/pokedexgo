@@ -11,10 +11,10 @@ window.getIVs = (pkmn,stardust,cp,hp,upgraded=false)->
 		for posD in pivsDefense
 			for posS in pivsStamina
 				for posM,k in possibleLvlMult
-					if !upgraded
-						continue if posM.lvl % 1 isnt 0
-					else
-						continue if k isnt 0
+					# if !upgraded
+					# 	continue if posM.lvl % 1 isnt 0
+					# else
+					# 	continue if k isnt 0
 					posCP = Math.floor((pkmn.Stats.BaseAttack + posA) \
 						* ((pkmn.Stats.BaseDefense + posD)**0.5) \
 						* ((pkmn.Stats.BaseStamina + posS)**0.5) \

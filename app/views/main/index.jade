@@ -142,10 +142,10 @@ html
 							tr: td.spacer
 							tr
 								td
-									label.calcInput(style="font-size:inherit;")
+									//- label.calcInput(style="font-size:inherit;")
 										| Upgraded?
 										input(type="checkbox",v-model="upgraded")
-									.calc(v-on:click="calculateIV") Go
+									.calc(v-on:click="calculateIV",style="width:98%;margin:0 1%;") Go
 							tr(v-show="calculatedIV"): td.ivHolder
 								.ivChart
 									.bak(style="width:{{calculatedIV.prom*10}}%;")
