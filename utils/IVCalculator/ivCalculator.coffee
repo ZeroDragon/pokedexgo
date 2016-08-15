@@ -24,8 +24,9 @@ window.getIVs = (pkmn,stardust,cp,hp,upgraded=false)->
 						ivs.push {Atk:posA,Def:posD,Sta:posS,lvl:posM.lvl,grade:Math.round((posA+posD+posS)*100/45)/10}
 
 	ivs.sort (a,b)-> b.grade-a.grade
-	ivs.pop()
-	ivs.shift()
+	if ivs.length > 2
+		ivs.pop()
+		ivs.shift()
 	tot += iv.grade for iv in ivs
 	worst = ivs[ivs.length-1]
 	best = ivs[0]
